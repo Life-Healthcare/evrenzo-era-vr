@@ -1,6 +1,6 @@
 import React from "react";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import sceneConfig from "@/config/scene-config";
+import { PerspectiveCamera } from "@react-three/drei";
+import canvasConfig from "@/config/canvas-config";
 
 type Props = {
   children?: React.ReactNode;
@@ -8,15 +8,10 @@ type Props = {
 
 export default function Camera({ children }: Props) {
   return (
-    <>
-      <PerspectiveCamera makeDefault position={sceneConfig.camera.position}>
-        <group
-          position={sceneConfig.camera.position.clone().multiplyScalar(-1)}
-        >
-          {children}
-        </group>
-      </PerspectiveCamera>
-      <OrbitControls makeDefault />
-    </>
+    <PerspectiveCamera makeDefault position={canvasConfig.camera.position}>
+      <group position={canvasConfig.camera.position.clone().multiplyScalar(-1)}>
+        {children}
+      </group>
+    </PerspectiveCamera>
   );
 }
