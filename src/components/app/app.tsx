@@ -7,8 +7,8 @@ import { AppReset } from "@/components/app/app.styles";
 import canvasConfig from "@/config/canvas-config";
 import Container from "@/components/app/container";
 import Camera from "@/components/camera/camera";
-
-const Home = React.lazy(() => import("@/pages/home/home"));
+import Home from "@/pages/home/home";
+import Scene from "@/pages/scene/scene";
 
 export default function App() {
   return (
@@ -28,6 +28,7 @@ export default function App() {
               >
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/scene/:id" element={<Scene />} />
                 </Routes>
               </group>
             </Container>
