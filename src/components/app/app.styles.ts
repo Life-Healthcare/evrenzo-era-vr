@@ -27,4 +27,9 @@ export const AppReset = createGlobalStyle`
     background-color: #1e1e1e;
     color: #fefefe;
   }
+
+  #VRButton {
+    bottom: 50% !important;
+    transform: translateY(50%) !important;
+  }
 `;
