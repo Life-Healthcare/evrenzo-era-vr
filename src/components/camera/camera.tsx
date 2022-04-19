@@ -8,7 +8,13 @@ type Props = {
 
 export default function Camera({ children }: Props) {
   return (
-    <PerspectiveCamera makeDefault position={canvasConfig.camera.position}>
+    <PerspectiveCamera
+      makeDefault
+      position={canvasConfig.camera.position}
+      near={0.0001}
+      far={10000}
+      frustumCulled={false}
+    >
       <group position={canvasConfig.camera.position.clone().multiplyScalar(-1)}>
         {children}
       </group>

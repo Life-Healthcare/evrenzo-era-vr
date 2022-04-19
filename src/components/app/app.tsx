@@ -23,6 +23,7 @@ export default function App() {
               <ambientLight />
               <group
                 position={canvasConfig.camera.position
+                  .clone()
                   .multiplyScalar(-1)
                   .add(canvasConfig.scene.offset)}
               >

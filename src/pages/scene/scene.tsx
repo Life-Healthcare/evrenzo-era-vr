@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Text } from "@react-three/drei";
+import Sphere from "@/components/sphere/sphere";
 
 export default function Scene() {
   const params = useParams();
@@ -9,12 +10,12 @@ export default function Scene() {
   }, [params]);
 
   return (
-    <group>
+    <Sphere src={`/assets/scenes/${id}.jpg`}>
       <mesh>
         <planeBufferGeometry />
         <meshBasicMaterial color="crimson" />
       </mesh>
-      <Text position={[0, 0, 0.0001]}>{id}</Text>
-    </group>
+      <Text position={[0, 0, 0.001]}>{id}</Text>
+    </Sphere>
   );
 }
