@@ -19,7 +19,7 @@ export default function Sphere({ src, children }: Props) {
     const fovInRadians = (cam.fov * Math.PI) / 180;
     const height = Math.abs(cam.position.z * Math.tan(fovInRadians / 2) * 2);
     const width = height * cam.aspect;
-    return Math.max(width, height);
+    return Math.max(width, height) * 2;
   }, [camera]);
 
   return (

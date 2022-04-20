@@ -7,6 +7,9 @@ type CanvasConfig = {
   scene: {
     offset: THREE.Vector3;
   };
+  artwork: {
+    height: number;
+  };
 };
 
 const canvasConfig: CanvasConfig = {
@@ -15,6 +18,9 @@ const canvasConfig: CanvasConfig = {
   },
   scene: {
     offset: new THREE.Vector3(0, 1.65, 0),
+  },
+  artwork: {
+    height: 1080,
   },
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Text } from "@react-three/drei";
 import Sphere from "@/components/sphere/sphere";
+import assets from "@/config/assets";
 
 export default function Scene() {
   const params = useParams();
@@ -10,7 +11,8 @@ export default function Scene() {
   }, [params]);
 
   return (
-    <Sphere src={`/assets/scenes/${id}.jpg`}>
+    // @ts-ignore
+    <Sphere key={id} src={assets.scene[id].sphere}>
       <mesh>
         <planeBufferGeometry />
         <meshBasicMaterial color="crimson" />
