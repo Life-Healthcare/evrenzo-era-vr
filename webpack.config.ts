@@ -13,6 +13,7 @@ const SRC_DIR = path.resolve(__dirname, "src");
 const PUBLIC_DIR = path.resolve(__dirname, "public");
 const BUILD_DIR = path.resolve(__dirname, "build");
 const PUBLIC_PATH = process.env.PUBLIC_PATH ?? "/";
+const https = process.env.HTTPS === "true";
 
 const config = {
   mode: DEV_MODE ? "development" : "production",
@@ -23,6 +24,7 @@ const config = {
   devServer: {
     historyApiFallback: true,
     hot: true,
+    https,
   },
   module: {
     rules: [

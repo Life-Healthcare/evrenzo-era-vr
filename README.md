@@ -9,6 +9,15 @@ npm install
 npm start
 ```
 
+### Running on Oculus
+
+You need to run the app in HTTPS mode for it to work on Oculus:
+
+```shell
+npm install
+npm run start-https
+```
+
 ### Production Build
 
 ```shell
