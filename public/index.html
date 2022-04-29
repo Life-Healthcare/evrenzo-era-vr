@@ -11,9 +11,25 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <title>App</title>
+    <title>Evrenzo ERA VR</title>
+    <style>
+      .hidden {
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
+    <video
+      id="scene-video"
+      muted
+      playsinline
+      preload="auto"
+      class="hidden"
+    ></video>
     <div id="root"></div>
   </body>
 </html>

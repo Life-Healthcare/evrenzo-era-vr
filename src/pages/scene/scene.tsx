@@ -11,7 +11,7 @@ export default function Scene() {
   }, [page]);
 
   return (
-    <Sphere key={id} src={asset(`/assets/scene/${id}.jpg`)}>
+    <Sphere type="video" src={asset(`/assets/scene/${id}.mp4`)}>
       <mesh>
         <planeBufferGeometry />
         <meshBasicMaterial color="crimson" />
