@@ -1,5 +1,5 @@
 import create from "zustand";
-import { Page } from "@/types";
+import { Page, PageId } from "@/types";
 
 type AppState = {
   page: Page;
@@ -9,7 +9,7 @@ type AppState = {
 export const appState = create<AppState>((set) => {
   return {
     page: {
-      id: "home",
+      id: PageId.home,
     },
     setPage(page) {
       set({ page });

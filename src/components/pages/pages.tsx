@@ -1,17 +1,18 @@
 import React from "react";
 import { Text } from "@react-three/drei";
 import useAppState from "@/hooks/use-app-state";
+import { PageId } from "@/types";
 import Home from "@/pages/home/home";
-import Scene from "@/pages/scene/scene";
+import First from "@/pages/first/first";
 
 export default function Pages() {
   const page = useAppState((state) => state.page);
 
   switch (page.id) {
-    case "home":
+    case PageId.home:
       return <Home />;
-    case "scene":
-      return <Scene />;
+    case PageId.first:
+      return <First />;
     default:
       return <Text>Page Not Found</Text>;
   }

@@ -1,5 +1,10 @@
+export enum PageId {
+  home,
+  first,
+}
+
 export type Page = {
-  id: string;
+  id: PageId;
   params?: {
     [param: string]: any;
   };
