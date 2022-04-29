@@ -1,17 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Interactive } from "@react-three/xr";
 import Sphere from "@/components/sphere/sphere";
-import assets from "@/config/assets";
 import Button from "@/components/button/button";
 import Image from "@/components/image/image";
 import { asset } from "@/utils";
+import useAppState from "@/hooks/use-app-state";
 
 export default function Home() {
-  const navigate = useNavigate();
+  const setPage = useAppState((state) => state.setPage);
 
   return (
-    <Sphere src={assets.home.sphere}>
+    <Sphere src={asset("/assets/home/sphere.jpg")}>
       <group position={[0, 0.5, 0]}>
         <Image src={asset("/assets/home/instructions.png")} height={3} />
         <Interactive>
@@ -19,7 +18,7 @@ export default function Home() {
             image={asset("/assets/buttons/start-experience.png")}
             height={0.5}
             position={[0, -2, 0]}
-            onSelect={() => navigate("/scene/1")}
+            onSelect={() => setPage({ id: "scene", params: { id: 1 } })}
           />
         </Interactive>
         <Image

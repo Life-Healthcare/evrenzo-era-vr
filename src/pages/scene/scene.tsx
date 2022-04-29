@@ -1,18 +1,17 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { Text } from "@react-three/drei";
 import Sphere from "@/components/sphere/sphere";
-import assets from "@/config/assets";
+import { asset } from "@/utils";
+import useAppState from "@/hooks/use-app-state";
 
 export default function Scene() {
-  const params = useParams();
+  const page = useAppState((state) => state.page);
   const id = React.useMemo(() => {
-    return parseInt(params.id ?? "1");
-  }, [params]);
+    return page.params?.id ?? 1;
+  }, [page]);
 
   return (
-    // @ts-ignore
-    <Sphere key={id} src={assets.scene[id].sphere}>
+    <Sphere key={id} src={asset(`/assets/scene/${id}.jpg`)}>
       <mesh>
         <planeBufferGeometry />
         <meshBasicMaterial color="crimson" />

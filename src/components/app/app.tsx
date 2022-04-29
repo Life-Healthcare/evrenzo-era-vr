@@ -1,13 +1,27 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { VRCanvas as Canvas, DefaultXRControllers } from "@react-three/xr";
+// import { Canvas } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import { AppReset } from "@/components/app/app.styles";
 import canvasConfig from "@/config/canvas-config";
 import Container from "@/components/app/container";
 import Camera from "@/components/camera/camera";
-import Home from "@/pages/home/home";
-import Scene from "@/pages/scene/scene";
+import Pages from "@/components/pages/pages";
+import useAppState from "@/hooks/use-app-state";
+
+// @todo remove when not in debug mode
+window.addEventListener("keydown", (event) => {
+  const { setPage } = useAppState.getState();
+  const key = event.key.toLowerCase();
+  switch (key) {
+    case "1":
+      setPage({ id: "home" });
+      break;
+    case "2":
+      setPage({ id: "scene", params: { id: 1 } });
+      break;
+  }
+});
 
 export default function App() {
   return (
@@ -15,24 +29,19 @@ export default function App() {
       <AppReset />
       <Canvas flat linear dpr={1}>
         <React.Suspense fallback={<Text>Loading...</Text>}>
-          <Router>
-            <Container>
-              <Camera />
-              <DefaultXRControllers />
-              <ambientLight />
-              <group
-                position={canvasConfig.camera.position
-                  .clone()
-                  .multiplyScalar(-1)
-                  .add(canvasConfig.scene.offset)}
-              >
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/scene/:id" element={<Scene />} />
-                </Routes>
-              </group>
-            </Container>
-          </Router>
+          <Container>
+            <Camera />
+            {/*<DefaultXRControllers />*/}
+            <ambientLight />
+            <group
+              position={canvasConfig.camera.position
+                .clone()
+                .multiplyScalar(-1)
+                .add(canvasConfig.scene.offset)}
+            >
+              <Pages />
+            </group>
+          </Container>
         </React.Suspense>
       </Canvas>
     </>
