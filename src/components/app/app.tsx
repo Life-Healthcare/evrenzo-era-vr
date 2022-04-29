@@ -1,6 +1,5 @@
 import React from "react";
 import { VRCanvas as Canvas, DefaultXRControllers } from "@react-three/xr";
-// import { Canvas } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import { AppReset } from "@/components/app/app.styles";
 import canvasConfig from "@/config/canvas-config";
@@ -31,7 +30,7 @@ export default function App() {
         <React.Suspense fallback={<Text>Loading...</Text>}>
           <Container>
             <Camera />
-            {/*<DefaultXRControllers />*/}
+            <DefaultXRControllers />
             <ambientLight />
             <group
               position={canvasConfig.camera.position
