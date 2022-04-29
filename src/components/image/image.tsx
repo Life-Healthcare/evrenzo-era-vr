@@ -1,6 +1,6 @@
 import React from "react";
-import { GroupProps, useThree } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
+import { GroupProps } from "@react-three/fiber";
+import useImageTexture from "@/hooks/use-image-texture";
 
 type Props = GroupProps & {
   src?: string;
@@ -8,21 +8,13 @@ type Props = GroupProps & {
 };
 
 export default function Image({ src, height, ...props }: Props) {
-  const texture = useTexture(src);
-  const { gl } = useThree();
-  React.useMemo(() => {
-    texture.anisotropy = gl.capabilities.getMaxAnisotropy();
-  }, [texture, gl]);
-  const width = React.useMemo(() => {
-    const aspect = texture.image.width / texture.image.height;
-    return height * aspect;
-  }, [texture, height]);
+  const texture = useImageTexture(src, height);
 
   return (
     <group {...props}>
       <mesh frustumCulled={false}>
-        <planeBufferGeometry args={[width, height]} />
-        <meshBasicMaterial transparent map={texture} />
+        <planeBufferGeometry args={texture.args} />
+        <meshBasicMaterial transparent map={texture.map} />
       </mesh>
     </group>
   );
