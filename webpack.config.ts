@@ -80,6 +80,9 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env.PUBLIC_PATH": JSON.stringify(PUBLIC_PATH),
+      "process.env.NODE_ENV": JSON.stringify(
+        process.env.NODE_ENV ?? "production"
+      ),
     }),
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({

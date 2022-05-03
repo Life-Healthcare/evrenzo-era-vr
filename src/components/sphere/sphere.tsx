@@ -68,15 +68,17 @@ export default function Sphere({
 
   return (
     <group>
-      <mesh scale={[-1, 1, 1]} position={canvasConfig.camera.position.clone()}>
-        <sphereBufferGeometry args={[radius, 64, 64]} />
-        <meshBasicMaterial
-          map={type === "image" ? texture : undefined}
-          side={THREE.BackSide}
-        >
-          {type === "video" && <videoTexture attach="map" args={[video]} />}
-        </meshBasicMaterial>
-      </mesh>
+      <group rotation={[0, THREE.MathUtils.degToRad(-90), 0]}>
+        <mesh scale={[-1, 1, 1]} position={canvasConfig.camera.position.clone()}>
+          <sphereBufferGeometry args={[radius, 64, 64]} />
+          <meshBasicMaterial
+            map={type === "image" ? texture : undefined}
+            side={THREE.BackSide}
+          >
+            {type === "video" && <videoTexture attach="map" args={[video]} />}
+          </meshBasicMaterial>
+        </mesh>
+      </group>
       <group>{children}</group>
     </group>
   );

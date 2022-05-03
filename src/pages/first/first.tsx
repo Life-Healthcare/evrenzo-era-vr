@@ -6,6 +6,7 @@ import { Interactive } from "@react-three/xr";
 import Button from "@/components/button/button";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
+import config from "@/config/config";
 
 export default function First() {
   const setPage = useAppState((state) => state.setPage);
@@ -18,7 +19,8 @@ export default function First() {
       type="video"
       src={asset("/assets/first/sphere.mp4")}
       loop={false}
-      playbackRate={8}
+      // playbackRate={config.env === "development" ? 8 : 1}
+      playbackRate={1}
       onVideoEnded={() => setVideoEnded(true)}
     >
       {videoEnded && (
