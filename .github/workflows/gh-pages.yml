@@ -17,6 +17,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
+          git lfs pull
           rm -rf node_modules package-lock.json
           npm install
           PUBLIC_PATH=./ npm run build
