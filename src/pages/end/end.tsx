@@ -14,7 +14,6 @@ export default function End() {
     <Sphere
       type="video"
       src={asset("/assets/end/sphere.mp4")}
-      loop={false}
       playbackRate={config.env === "development" ? 8 : 1}
     >
       <Interactive onSelect={() => setPage({ id: PageId.home })}>
