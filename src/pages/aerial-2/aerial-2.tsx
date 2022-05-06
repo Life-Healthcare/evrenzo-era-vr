@@ -17,7 +17,6 @@ export default function Aerial2() {
   const [videoEnded, setVideoEnded] = React.useState(false);
   const [showVideo, setShowVideo] = React.useState(false);
 
-  // @todo use audio?
   const audio = useAudio(asset("/assets/aerial-2/voiceover.mp3"));
 
   const videoButton = React.useMemo(() => {
@@ -46,7 +45,7 @@ export default function Aerial2() {
                 image={asset("/assets/buttons/skip-and-continue.png")}
                 height={0.5}
                 position={[0, -2, 0]}
-                onSelect={() => setPage({ id: PageId.aerial2 })}
+                onSelect={() => setPage({ id: PageId.farmers })}
               />
             </>
           )}
@@ -62,7 +61,7 @@ export default function Aerial2() {
                 image={asset(`/assets/buttons/${videoButton}.png`)}
                 height={0.5}
                 position={[0, -2, 0]}
-                onSelect={() => setPage({ id: PageId.aerial2 })}
+                onSelect={() => setPage({ id: PageId.farmers })}
               />
             </>
           )}

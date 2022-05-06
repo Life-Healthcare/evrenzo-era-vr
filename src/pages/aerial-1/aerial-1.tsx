@@ -11,7 +11,7 @@ import config from "@/config/config";
 export default function Aerial1() {
   const setPage = useAppState((state) => state.setPage);
 
-  const [videoEnded, setVideoEnded] = React.useState(false);
+  const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showChart, setShowChart] = React.useState(false);
 
   return (
@@ -20,9 +20,9 @@ export default function Aerial1() {
       src={asset("/assets/aerial-1/sphere.mp4")}
       loop={false}
       playbackRate={config.env === "development" ? 8 : 1}
-      onVideoEnded={() => setVideoEnded(true)}
+      onVideoEnded={() => setSphereVideoEnded(true)}
     >
-      {videoEnded && (
+      {sphereVideoEnded && (
         <group position={[0, 0.5, 0]}>
           {!showChart && (
             <>

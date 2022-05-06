@@ -23,6 +23,15 @@ window.addEventListener("keydown", (event) => {
     case "3":
       setPage({ id: PageId.aerial2 });
       break;
+    case "4":
+      setPage({ id: PageId.farmers });
+      break;
+    case "5":
+      setPage({ id: PageId.yak });
+      break;
+    case "6":
+      setPage({ id: PageId.mountainPass });
+      break;
   }
 });
 

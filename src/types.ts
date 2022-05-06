@@ -2,6 +2,9 @@ export enum PageId {
   home,
   aerial1,
   aerial2,
+  farmers,
+  yak,
+  mountainPass,
 }
 
 export type Page = {
