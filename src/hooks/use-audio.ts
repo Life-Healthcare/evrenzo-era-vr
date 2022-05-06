@@ -15,6 +15,8 @@ export default function useAudio(src: string, onEnded?: () => void): UseAudio {
   React.useEffect(() => {
     audio.addEventListener("ended", onEndedRef.current);
 
+    audio.pause();
+    audio.currentTime = 0;
     audio.muted = false;
     audio.src = src;
     audio.load();

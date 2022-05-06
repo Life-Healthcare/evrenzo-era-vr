@@ -8,6 +8,8 @@ import Aerial2 from "@/pages/aerial-2/aerial-2";
 import Farmers from "@/pages/farmers/farmers";
 import Yak from "@/pages/yak/yak";
 import MountainPass from "@/pages/mountain-pass/mountain-pass";
+import Timelapse from "@/pages/timelapse/timelapse";
+import End from "@/pages/end/end";
 
 export default function Pages() {
   const page = useAppState((state) => state.page);
@@ -25,6 +27,10 @@ export default function Pages() {
       return <Yak />;
     case PageId.mountainPass:
       return <MountainPass />;
+    case PageId.timelapse:
+      return <Timelapse />;
+    case PageId.end:
+      return <End />;
     default:
       return <Text>Page Not Found</Text>;
   }

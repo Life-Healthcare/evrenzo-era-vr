@@ -17,6 +17,8 @@ export default function useImageTexture(
 
   React.useMemo(() => {
     texture.anisotropy = gl.capabilities.getMaxAnisotropy();
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
   }, [texture, gl]);
 
   const width = React.useMemo(() => {

@@ -58,6 +58,8 @@ export default function useVideo(
     video.addEventListener("play", onPlay);
     video.addEventListener("ended", onEnded);
 
+    video.pause();
+    video.currentTime = 0;
     video.muted = false;
     video.src = src;
     video.load();

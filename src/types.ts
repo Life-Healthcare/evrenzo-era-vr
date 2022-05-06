@@ -5,6 +5,8 @@ export enum PageId {
   farmers,
   yak,
   mountainPass,
+  timelapse,
+  end,
 }
 
 export type Page = {

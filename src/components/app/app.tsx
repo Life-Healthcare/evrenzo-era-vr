@@ -32,6 +32,12 @@ window.addEventListener("keydown", (event) => {
     case "6":
       setPage({ id: PageId.mountainPass });
       break;
+    case "7":
+      setPage({ id: PageId.timelapse });
+      break;
+    case "8":
+      setPage({ id: PageId.end });
+      break;
   }
 });
 
