@@ -40,7 +40,6 @@ export default function Timelapse() {
       type="video"
       src={asset("/assets/timelapse/sphere.mp4")}
       loop={false}
-      playbackRate={config.env === "development" ? 8 : 1}
       onVideoEnded={() => setSphereVideoEnded(true)}
     >
       {sphereVideoEnded && (

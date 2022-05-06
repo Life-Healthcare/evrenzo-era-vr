@@ -3,13 +3,13 @@ import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import canvasConfig from "@/config/canvas-config";
+import config from "@/config/config";
 
 type Props = {
   src: string;
   type?: "image" | "video";
   children?: React.ReactNode;
   loop?: boolean;
-  playbackRate?: number;
   onVideoEnded?: () => void;
 };
 
@@ -21,7 +21,6 @@ export default function Sphere({
   type = "image",
   children,
   loop = true,
-  playbackRate = 1,
   onVideoEnded,
 }: Props) {
   const texture = useTexture(type === "image" ? src : blankImage);
@@ -51,8 +50,8 @@ export default function Sphere({
 
   React.useEffect(() => {
     video.loop = loop;
-    video.playbackRate = playbackRate;
-  }, [video, loop, playbackRate]);
+    video.playbackRate = config.env === "development" ? 8 : 1;
+  }, [video, loop]);
 
   React.useEffect(() => {
     video.play().catch((err) => {

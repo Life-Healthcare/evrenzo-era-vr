@@ -16,7 +16,6 @@ export default function MountainPass() {
       type="video"
       src={asset("/assets/mountain-pass/sphere.mp4")}
       loop={false}
-      playbackRate={config.env === "development" ? 8 : 1}
       onVideoEnded={() => setPage({ id: PageId.timelapse })}
     />
   );

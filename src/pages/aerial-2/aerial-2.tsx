@@ -28,7 +28,6 @@ export default function Aerial2() {
       type="video"
       src={asset("/assets/aerial-2/sphere.mp4")}
       loop={false}
-      playbackRate={config.env === "development" ? 8 : 1}
       onVideoEnded={() => setSphereVideoEnded(true)}
     >
       {sphereVideoEnded && (

@@ -10,7 +10,7 @@ export default function Home() {
   const setPage = useAppState((state) => state.setPage);
 
   return (
-    <Sphere src={asset("/assets/home/sphere.jpg")}>
+    <Sphere type="video" src={asset("/assets/home/sphere.mp4")}>
       <group position={[0, 0.5, 0]}>
         <Image src={asset("/assets/home/instructions.png")} height={3} />
         <Button

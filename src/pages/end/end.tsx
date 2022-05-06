@@ -11,11 +11,7 @@ export default function End() {
   const setPage = useAppState((state) => state.setPage);
 
   return (
-    <Sphere
-      type="video"
-      src={asset("/assets/end/sphere.mp4")}
-      playbackRate={config.env === "development" ? 8 : 1}
-    >
+    <Sphere type="video" src={asset("/assets/end/sphere.mp4")}>
       <Interactive onSelect={() => setPage({ id: PageId.home })}>
         <Image src={asset("/assets/end/image.png")} height={4} />
       </Interactive>
