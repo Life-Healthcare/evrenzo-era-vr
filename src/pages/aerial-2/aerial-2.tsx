@@ -8,6 +8,7 @@ import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
 import config from "@/config/config";
 import Video from "@/components/video/video";
+import useAudio from "@/hooks/use-audio";
 
 export default function Aerial2() {
   const setPage = useAppState((state) => state.setPage);
@@ -15,6 +16,9 @@ export default function Aerial2() {
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [videoEnded, setVideoEnded] = React.useState(false);
   const [showVideo, setShowVideo] = React.useState(false);
+
+  // @todo use audio?
+  const audio = useAudio(asset("/assets/aerial-2/voiceover.mp3"));
 
   const videoButton = React.useMemo(() => {
     return videoEnded ? "continue" : "skip-and-continue";
@@ -51,6 +55,7 @@ export default function Aerial2() {
               <Video
                 src={asset("/assets/aerial-2/video.mp4")}
                 height={3}
+                onPlay={() => audio.pause()}
                 onEnded={() => setVideoEnded(true)}
               />
               <Button
