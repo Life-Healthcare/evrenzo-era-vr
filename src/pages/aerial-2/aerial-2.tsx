@@ -16,6 +16,10 @@ export default function Aerial2() {
   const [videoEnded, setVideoEnded] = React.useState(false);
   const [showVideo, setShowVideo] = React.useState(false);
 
+  const videoButton = React.useMemo(() => {
+    return videoEnded ? "continue" : "skip-and-continue";
+  }, [videoEnded]);
+
   return (
     <Sphere
       type="video"
@@ -50,11 +54,7 @@ export default function Aerial2() {
                 onEnded={() => setVideoEnded(true)}
               />
               <Button
-                image={asset(
-                  `/assets/buttons/${
-                    videoEnded ? "continue" : "skip-and-continue"
-                  }.png`
-                )}
+                image={asset(`/assets/buttons/${videoButton}.png`)}
                 height={0.5}
                 position={[0, -2, 0]}
                 onSelect={() => setPage({ id: PageId.aerial2 })}
