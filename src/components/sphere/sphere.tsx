@@ -44,7 +44,7 @@ export default function Sphere({
   }, [onVideoEnded]);
 
   const video = React.useMemo(() => {
-    const video = document.querySelector<HTMLVideoElement>("#scene-video");
+    const video = document.querySelector<HTMLVideoElement>("#sphere-video");
     video.src = type === "image" ? blankVideo : src;
     return video;
   }, [type, src]);

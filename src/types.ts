@@ -1,6 +1,7 @@
 export enum PageId {
   home,
-  first,
+  aerial1,
+  aerial2,
 }
 
 export type Page = {

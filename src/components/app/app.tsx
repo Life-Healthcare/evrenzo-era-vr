@@ -18,7 +18,10 @@ window.addEventListener("keydown", (event) => {
       setPage({ id: PageId.home });
       break;
     case "2":
-      setPage({ id: PageId.first });
+      setPage({ id: PageId.aerial1 });
+      break;
+    case "3":
+      setPage({ id: PageId.aerial2 });
       break;
   }
 });

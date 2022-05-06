@@ -14,9 +14,11 @@ export default function useImageTexture(
 ): UseImageTexture {
   const texture = useTexture(src);
   const { gl } = useThree();
+
   React.useMemo(() => {
     texture.anisotropy = gl.capabilities.getMaxAnisotropy();
   }, [texture, gl]);
+
   const width = React.useMemo(() => {
     const aspect = texture.image.width / texture.image.height;
     return height * aspect;

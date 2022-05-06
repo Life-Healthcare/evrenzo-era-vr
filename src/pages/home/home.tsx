@@ -17,7 +17,7 @@ export default function Home() {
           image={asset("/assets/buttons/start-experience.png")}
           height={0.5}
           position={[0, -2, 0]}
-          onSelect={() => setPage({ id: PageId.first })}
+          onSelect={() => setPage({ id: PageId.aerial1 })}
         />
         <Image
           src={asset("/assets/home/disclaimer.png")}
