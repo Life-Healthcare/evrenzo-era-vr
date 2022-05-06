@@ -5,7 +5,6 @@ import Image from "@/components/image/image";
 import { Interactive } from "@react-three/xr";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
-import config from "@/config/config";
 
 export default function End() {
   const setPage = useAppState((state) => state.setPage);

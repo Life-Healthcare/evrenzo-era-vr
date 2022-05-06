@@ -6,7 +6,6 @@ import { Interactive } from "@react-three/xr";
 import Button from "@/components/button/button";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
-import config from "@/config/config";
 
 export default function Aerial1() {
   const setPage = useAppState((state) => state.setPage);

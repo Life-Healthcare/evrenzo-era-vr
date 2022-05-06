@@ -3,7 +3,6 @@ import Sphere from "@/components/sphere/sphere";
 import { asset } from "@/utils";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
-import config from "@/config/config";
 import useAudio from "@/hooks/use-audio";
 
 export default function Yak() {
