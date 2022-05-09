@@ -24,9 +24,12 @@ export default function Timelapse() {
   const [state, setState] = React.useState<State>(State.video);
 
   const audioUrl = React.useMemo(() => {
-    const id = state === State.video ? 1 : 2;
+    let id = 0;
+    if (sphereVideoEnded) {
+      id = state === State.video ? 1 : 2;
+    }
     return asset(`/assets/timelapse/voiceover-${id}.mp3`);
-  }, [state]);
+  }, [sphereVideoEnded, state]);
 
   const audio = useAudio(audioUrl);
 
@@ -80,7 +83,7 @@ export default function Timelapse() {
             </>
           )}
           {state === State.image && (
-            <Interactive onSelect={() => setPage({ id: PageId.timelapse })}>
+            <Interactive onSelect={() => setPage({ id: PageId.end })}>
               <Image src={asset("/assets/timelapse/image.png")} height={3.5} />
             </Interactive>
           )}

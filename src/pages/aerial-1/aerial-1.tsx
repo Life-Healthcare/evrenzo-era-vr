@@ -6,12 +6,15 @@ import { Interactive } from "@react-three/xr";
 import Button from "@/components/button/button";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
+import useAudio from "@/hooks/use-audio";
 
 export default function Aerial1() {
   const setPage = useAppState((state) => state.setPage);
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showChart, setShowChart] = React.useState(false);
+
+  useAudio(asset(`/assets/aerial-1/voiceover-${showChart ? 2 : 1}.mp3`));
 
   return (
     <Sphere
