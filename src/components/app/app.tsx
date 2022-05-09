@@ -8,6 +8,7 @@ import Camera from "@/components/camera/camera";
 import Pages from "@/components/pages/pages";
 import useAppState from "@/hooks/use-app-state";
 import { PageId } from "@/types";
+import Controllers from "@/components/controllers/controllers";
 
 // @todo remove when not in debug mode
 window.addEventListener("keydown", (event) => {
@@ -42,6 +43,8 @@ window.addEventListener("keydown", (event) => {
 });
 
 export default function App() {
+  const { isPresenting } = useAppState();
+
   return (
     <>
       <AppReset />
@@ -49,7 +52,18 @@ export default function App() {
         <React.Suspense fallback={<Text>Loading...</Text>}>
           <Container>
             <Camera />
-            <DefaultXRControllers />
+            {isPresenting && (
+              <>
+                <DefaultXRControllers
+                  rayMaterial={{
+                    color: "white",
+                    transparent: true,
+                    opacity: 0,
+                  }}
+                />
+                <Controllers />
+              </>
+            )}
             <ambientLight />
             <group
               position={canvasConfig.camera.position

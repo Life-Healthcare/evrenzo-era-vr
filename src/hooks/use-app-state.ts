@@ -4,6 +4,8 @@ import { Page, PageId } from "@/types";
 type AppState = {
   page: Page;
   setPage: (page: Page) => void;
+  isPresenting: boolean;
+  setIsPresenting: (isPresenting: boolean) => void;
 };
 
 export const appState = create<AppState>((set) => {
@@ -13,6 +15,10 @@ export const appState = create<AppState>((set) => {
     },
     setPage(page) {
       set({ page });
+    },
+    isPresenting: false,
+    setIsPresenting(isPresenting) {
+      set({ isPresenting });
     },
   };
 });
