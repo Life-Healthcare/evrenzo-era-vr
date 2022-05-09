@@ -22,6 +22,10 @@ export default function Aerial2() {
     return videoEnded ? "continue" : "skip-and-continue";
   }, [videoEnded]);
 
+  React.useEffect(() => {
+    return () => audio.pause();
+  }, []);
+
   return (
     <Sphere
       type="video"

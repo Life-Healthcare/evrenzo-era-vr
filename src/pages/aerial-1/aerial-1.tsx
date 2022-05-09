@@ -14,7 +14,13 @@ export default function Aerial1() {
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showChart, setShowChart] = React.useState(false);
 
-  useAudio(asset(`/assets/aerial-1/voiceover-${showChart ? 2 : 1}.mp3`));
+  const audio = useAudio(
+    asset(`/assets/aerial-1/voiceover-${showChart ? 2 : 1}.mp3`)
+  );
+
+  React.useEffect(() => {
+    return () => audio.pause();
+  }, []);
 
   return (
     <Sphere

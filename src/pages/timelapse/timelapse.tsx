@@ -33,6 +33,10 @@ export default function Timelapse() {
 
   const audio = useAudio(audioUrl);
 
+  React.useEffect(() => {
+    return () => audio.pause();
+  }, []);
+
   const videoButton = React.useMemo(() => {
     return videoEnded ? "continue" : "skip-and-continue";
   }, [videoEnded]);

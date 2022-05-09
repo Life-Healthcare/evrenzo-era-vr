@@ -8,7 +8,11 @@ import useAudio from "@/hooks/use-audio";
 export default function Farmers() {
   const setPage = useAppState((state) => state.setPage);
 
-  useAudio(asset("/assets/farmers/voiceover.mp3"));
+  const audio = useAudio(asset("/assets/farmers/voiceover.mp3"));
+
+  React.useEffect(() => {
+    return () => audio.pause();
+  }, []);
 
   return (
     <Sphere
