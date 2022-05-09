@@ -2,12 +2,12 @@ import React from "react";
 import Sphere from "@/components/sphere/sphere";
 import { asset } from "@/utils";
 import Image from "@/components/image/image";
-import { Interactive } from "@react-three/xr";
 import Button from "@/components/button/button";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
 import Video from "@/components/video/video";
 import useAudio from "@/hooks/use-audio";
+import Interact from "@/components/interact/interact";
 
 enum State {
   video,
@@ -54,12 +54,12 @@ export default function Timelapse() {
             <>
               {!showVideo && (
                 <>
-                  <Interactive onSelect={() => setShowVideo(true)}>
+                  <Interact onSelect={() => setShowVideo(true)}>
                     <Image
                       src={asset("/assets/timelapse/video-poster.png")}
                       height={3}
                     />
-                  </Interactive>
+                  </Interact>
                   <Button
                     image={asset("/assets/buttons/skip-and-continue.png")}
                     height={0.5}
@@ -87,9 +87,9 @@ export default function Timelapse() {
             </>
           )}
           {state === State.image && (
-            <Interactive onSelect={() => setPage({ id: PageId.end })}>
+            <Interact onSelect={() => setPage({ id: PageId.end })}>
               <Image src={asset("/assets/timelapse/image.png")} height={3.5} />
-            </Interactive>
+            </Interact>
           )}
         </group>
       )}

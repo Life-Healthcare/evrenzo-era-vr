@@ -1,6 +1,8 @@
 import React from "react";
 import * as THREE from "three";
 import { useXR } from "@react-three/xr";
+import { a, useSpring } from "@react-spring/three";
+import useAppState from "@/hooks/use-app-state";
 
 const RAY_LENGTH = Math.PI * 0.5;
 
@@ -9,6 +11,8 @@ type Props = {
 };
 
 export default function Controllers({ rayLength = RAY_LENGTH }: Props) {
+  const hovering = useAppState((state) => state.hovering);
+
   const { controllers } = useXR();
 
   const groupsRef = React.useRef<THREE.Group[]>([]);
@@ -28,6 +32,10 @@ export default function Controllers({ rayLength = RAY_LENGTH }: Props) {
     };
   }, [controllers, rayLength]);
 
+  const materialProps = useSpring({
+    color: hovering ? "#ffffff" : "#aaaaaa",
+  });
+
   return (
     <>
       {controllers.map((controller, index) => {
@@ -44,8 +52,8 @@ export default function Controllers({ rayLength = RAY_LENGTH }: Props) {
               }}
             >
               <boxBufferGeometry args={[0.002, rayLength, 0.002]} />
-              <meshBasicMaterial
-                color="white"
+              <a.meshBasicMaterial
+                {...materialProps}
                 side={THREE.DoubleSide}
                 transparent
                 opacity={0.5}

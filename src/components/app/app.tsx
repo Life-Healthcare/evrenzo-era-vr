@@ -56,7 +56,6 @@ export default function App() {
               <>
                 <DefaultXRControllers
                   rayMaterial={{
-                    color: "white",
                     transparent: true,
                     opacity: 0,
                   }}

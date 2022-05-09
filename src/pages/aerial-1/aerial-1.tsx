@@ -2,11 +2,11 @@ import React from "react";
 import Sphere from "@/components/sphere/sphere";
 import { asset } from "@/utils";
 import Image from "@/components/image/image";
-import { Interactive } from "@react-three/xr";
 import Button from "@/components/button/button";
 import { PageId } from "@/types";
 import useAppState from "@/hooks/use-app-state";
 import useAudio from "@/hooks/use-audio";
+import Interact from "@/components/interact/interact";
 
 export default function Aerial1() {
   const setPage = useAppState((state) => state.setPage);
@@ -33,12 +33,12 @@ export default function Aerial1() {
         <group position={[0, 0.5, 0]}>
           {!showChart && (
             <>
-              <Interactive onSelect={() => setShowChart(true)}>
+              <Interact onSelect={() => setShowChart(true)}>
                 <Image
                   src={asset("/assets/aerial-1/chart-intro.png")}
                   height={3}
                 />
-              </Interactive>
+              </Interact>
               <Button
                 image={asset("/assets/buttons/skip-and-continue.png")}
                 height={0.5}

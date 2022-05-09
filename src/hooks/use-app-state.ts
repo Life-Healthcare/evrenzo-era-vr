@@ -6,6 +6,8 @@ type AppState = {
   setPage: (page: Page) => void;
   isPresenting: boolean;
   setIsPresenting: (isPresenting: boolean) => void;
+  hovering: boolean;
+  setHovering: (hovering: boolean) => void;
 };
 
 export const appState = create<AppState>((set) => {
@@ -19,6 +21,10 @@ export const appState = create<AppState>((set) => {
     isPresenting: false,
     setIsPresenting(isPresenting) {
       set({ isPresenting });
+    },
+    hovering: false,
+    setHovering(hovering) {
+      set({ hovering });
     },
   };
 });
