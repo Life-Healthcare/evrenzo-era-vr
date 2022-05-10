@@ -1,11 +1,5 @@
 import React from "react";
-import * as THREE from "three";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { DefaultXRControllers, VRCanvas as Canvas } from "@react-three/xr";
 import { Text } from "@react-three/drei";
 import { AppReset } from "@/components/app/app.styles";
