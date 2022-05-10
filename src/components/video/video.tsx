@@ -24,10 +24,6 @@ export default function Video({
   const [state, video] = useVideo(src, { onPlay, onEnded });
   const texture = useVideoTexture([state, video], height);
 
-  React.useMemo(() => {
-    texture.video.playbackRate = config.env === "development" ? 8 : 1;
-  }, [texture]);
-
   React.useEffect(() => {
     function onEnded() {
       video.pause();

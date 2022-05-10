@@ -3,17 +3,12 @@ import React from "react";
 type UseAudio = HTMLAudioElement;
 
 export default function useAudio(src: string, onEnded?: () => void): UseAudio {
-  const onEndedRef = React.useRef(onEnded);
-  React.useMemo(() => {
-    onEndedRef.current = onEnded;
-  }, [onEnded]);
-
   const audio = React.useMemo(() => {
     return document.querySelector<HTMLAudioElement>("#audio");
   }, []);
 
   React.useEffect(() => {
-    audio.addEventListener("ended", onEndedRef.current);
+    audio.addEventListener("ended", onEnded);
 
     audio.pause();
     audio.currentTime = 0;
@@ -24,9 +19,9 @@ export default function useAudio(src: string, onEnded?: () => void): UseAudio {
       console.error(err);
     });
     return () => {
-      audio.removeEventListener("ended", onEndedRef.current);
+      audio.removeEventListener("ended", onEnded);
     };
-  }, [audio, src]);
+  }, [audio, src, onEnded]);
 
   return audio;
 }

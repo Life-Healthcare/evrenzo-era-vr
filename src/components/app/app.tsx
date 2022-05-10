@@ -45,30 +45,28 @@ export default function App() {
       <AppReset />
       {loading && <p>Loading ({progress}%)</p>}
       {!loading && (
-        <Canvas flat linear dpr={1}>
+        // @ts-ignore
+        <Canvas flat linear dpr={1} vr="true">
           <Router>
             <ResetAppOnExit />
-            <React.Suspense fallback={<Text>Loading...</Text>}>
-              <Container>
-                <Camera />
-                {isPresenting && (
-                  <>
-                    <DefaultXRControllers
-                      rayMaterial={{
-                        transparent: true,
-                        opacity: 0,
-                      }}
-                    />
-                    <Controllers />
-                  </>
-                )}
-                <ambientLight />
-                <group
-                  position={canvasConfig.camera.position
-                    .clone()
-                    .multiplyScalar(-1)
-                    .add(canvasConfig.scene.offset)}
-                >
+            <Container>
+              <Camera />
+              {isPresenting && (
+                <>
+                  <DefaultXRControllers
+                    rayMaterial={{ transparent: true, opacity: 0 }}
+                  />
+                  <Controllers />
+                </>
+              )}
+              <ambientLight />
+              <group
+                position={canvasConfig.camera.position
+                  .clone()
+                  .multiplyScalar(-1)
+                  .add(canvasConfig.scene.offset)}
+              >
+                <React.Suspense fallback={<Text>Loading...</Text>}>
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/aerial-1" element={<Aerial1 />} />
@@ -79,9 +77,9 @@ export default function App() {
                     <Route path="/timelapse" element={<Timelapse />} />
                     <Route path="/end" element={<End />} />
                   </Routes>
-                </group>
-              </Container>
-            </React.Suspense>
+                </React.Suspense>
+              </group>
+            </Container>
           </Router>
         </Canvas>
       )}

@@ -26,13 +26,12 @@ export default function Aerial2() {
     return () => audio.pause();
   }, []);
 
+  const onVideoEnded = React.useCallback(() => {
+    setSphereVideoEnded(true);
+  }, []);
+
   return (
-    <Sphere
-      type="video"
-      src={assets.aerial2Sphere}
-      loop={false}
-      onVideoEnded={() => setSphereVideoEnded(true)}
-    >
+    <Sphere src={assets.aerial2Sphere} loop={false} onVideoEnded={onVideoEnded}>
       {sphereVideoEnded && (
         <group position={[0, 0.5, 0]}>
           {!showVideo && (

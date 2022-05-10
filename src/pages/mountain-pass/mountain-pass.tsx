@@ -13,12 +13,15 @@ export default function MountainPass() {
     return () => audio.pause();
   }, []);
 
+  const onVideoEnded = React.useCallback(() => {
+    navigate("/timelapse");
+  }, []);
+
   return (
     <Sphere
-      type="video"
       src={assets.mountainPassSphere}
       loop={false}
-      onVideoEnded={() => navigate("/timelapse")}
+      onVideoEnded={onVideoEnded}
     />
   );
 }

@@ -13,12 +13,15 @@ export default function Farmers() {
     return () => audio.pause();
   }, []);
 
+  const onVideoEnded = React.useCallback(() => {
+    navigate("/yak");
+  }, []);
+
   return (
     <Sphere
-      type="video"
       src={assets.farmersSphere}
       loop={false}
-      onVideoEnded={() => navigate("/yak")}
+      onVideoEnded={onVideoEnded}
     />
   );
 }

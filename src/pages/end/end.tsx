@@ -16,7 +16,7 @@ export default function End() {
   }, []);
 
   return (
-    <Sphere type="video" src={assets.endSphere}>
+    <Sphere src={assets.endSphere}>
       <Interact onSelect={() => navigate("/")}>
         <Image src={assets.endImage} height={4} />
       </Interact>

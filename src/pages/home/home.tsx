@@ -9,9 +9,9 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <Sphere type="video" src={assets.homeSphere}>
+    <Sphere src={assets.homeSphere}>
       <group position={[0, 0.5, 0]}>
-        <Image src={assets.homeInstructions} />
+        <Image src={assets.homeInstructions} height={3} />
         <Button
           image={assets.homeStartExperience}
           height={0.5}

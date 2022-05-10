@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Sphere from "@/components/sphere/sphere";
+import assets from "@/config/assets";
 import Image from "@/components/image/image";
 import Button from "@/components/button/button";
 import Video from "@/components/video/video";
 import useAudio from "@/hooks/use-audio";
 import Interact from "@/components/interact/interact";
-import assets from "@/config/assets";
 
 enum State {
   video,
@@ -39,12 +39,15 @@ export default function Timelapse() {
     return assets.buttonSkipAndContinue;
   }, [videoEnded]);
 
+  const onVideoEnded = React.useCallback(() => {
+    setSphereVideoEnded(true);
+  }, []);
+
   return (
     <Sphere
-      type="video"
       src={assets.timelapseSphere}
       loop={false}
-      onVideoEnded={() => setSphereVideoEnded(true)}
+      onVideoEnded={onVideoEnded}
     >
       {sphereVideoEnded && (
         <group position={[0, 0.5, 0]}>
@@ -68,7 +71,7 @@ export default function Timelapse() {
                   <Video
                     src={assets.timelapseVideo}
                     height={3}
-                    onPlay={() => audio.pause()}
+                    // onPlay={() => audio.pause()}
                     onEnded={() => setVideoEnded(true)}
                   />
                   <Button

@@ -13,12 +13,11 @@ export default function Yak() {
     return () => audio.pause();
   }, []);
 
+  const onVideoEnded = React.useCallback(() => {
+    navigate("/mountain-pass");
+  }, []);
+
   return (
-    <Sphere
-      type="video"
-      src={assets.yakSphere}
-      loop={false}
-      onVideoEnded={() => navigate("/mountain-pass")}
-    />
+    <Sphere src={assets.yakSphere} loop={false} onVideoEnded={onVideoEnded} />
   );
 }
