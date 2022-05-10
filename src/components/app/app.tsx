@@ -1,5 +1,11 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import * as THREE from "three";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import { DefaultXRControllers, VRCanvas as Canvas } from "@react-three/xr";
 import { Text } from "@react-three/drei";
 import { AppReset } from "@/components/app/app.styles";
@@ -17,7 +23,8 @@ import Yak from "@/pages/yak/yak";
 import MountainPass from "@/pages/mountain-pass/mountain-pass";
 import Timelapse from "@/pages/timelapse/timelapse";
 import End from "@/pages/end/end";
-import ResetAppOnExit from "@/components/reset-app-on-exit";
+import ResetAppOnExit from "@/components/reset-app-on-exit/reset-app-on-exit";
+import ResetApp from "@/components/reset-app/reset-app";
 
 export default function App() {
   const { isPresenting } = useAppState();
@@ -48,6 +55,7 @@ export default function App() {
         // @ts-ignore
         <Canvas flat linear dpr={1} vr="true">
           <Router>
+            <ResetApp />
             <ResetAppOnExit />
             <Container>
               <Camera />
