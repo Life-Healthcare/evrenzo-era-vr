@@ -52,8 +52,16 @@ export default function App() {
       <AppReset />
       {loading && <p>Loading ({progress}%)</p>}
       {!loading && (
-        // @ts-ignore
-        <Canvas flat linear dpr={1} vr="true">
+        <Canvas
+          flat
+          linear
+          dpr={1}
+          // @ts-ignore
+          vr="true"
+          sessionInit={{
+            optionalFeatures: ["layers"],
+          }}
+        >
           <Router>
             <ResetApp />
             <ResetAppOnExit />
@@ -65,28 +73,33 @@ export default function App() {
                     rayMaterial={{ transparent: true, opacity: 0 }}
                   />
                   <Controllers />
+
+                  <ambientLight />
+
+                  <group
+                    position={canvasConfig.camera.position
+                      .clone()
+                      .multiplyScalar(-1)
+                      .add(canvasConfig.scene.offset)}
+                  >
+                    <React.Suspense fallback={<Text>Loading...</Text>}>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/aerial-1" element={<Aerial1 />} />
+                        <Route path="/aerial-2" element={<Aerial2 />} />
+                        <Route path="/farmers" element={<Farmers />} />
+                        <Route path="/yak" element={<Yak />} />
+                        <Route
+                          path="/mountain-pass"
+                          element={<MountainPass />}
+                        />
+                        <Route path="/timelapse" element={<Timelapse />} />
+                        <Route path="/end" element={<End />} />
+                      </Routes>
+                    </React.Suspense>
+                  </group>
                 </>
               )}
-              <ambientLight />
-              <group
-                position={canvasConfig.camera.position
-                  .clone()
-                  .multiplyScalar(-1)
-                  .add(canvasConfig.scene.offset)}
-              >
-                <React.Suspense fallback={<Text>Loading...</Text>}>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/aerial-1" element={<Aerial1 />} />
-                    <Route path="/aerial-2" element={<Aerial2 />} />
-                    <Route path="/farmers" element={<Farmers />} />
-                    <Route path="/yak" element={<Yak />} />
-                    <Route path="/mountain-pass" element={<MountainPass />} />
-                    <Route path="/timelapse" element={<Timelapse />} />
-                    <Route path="/end" element={<End />} />
-                  </Routes>
-                </React.Suspense>
-              </group>
             </Container>
           </Router>
         </Canvas>
