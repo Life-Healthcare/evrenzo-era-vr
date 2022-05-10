@@ -45,27 +45,23 @@ export default function Video({
         onSelect={() => {
           if (state.playing) {
             video.pause();
+          } else {
+            video.play().catch((err) => {
+              console.error(err);
+            });
           }
         }}
       >
         <mesh frustumCulled={false}>
           <planeBufferGeometry args={texture.args} />
-          <meshBasicMaterial transparent>
+          <meshBasicMaterial transparent depthWrite={false}>
             <videoTexture attach="map" args={[texture.video]} />
           </meshBasicMaterial>
         </mesh>
-      </Interact>
-      {!state.playing && (
-        <Interact
-          onSelect={() => {
-            video.play().catch((err) => {
-              console.error(err);
-            });
-          }}
-        >
+        {!state.playing && (
           <Image src="/assets/play.png" height={0.7} position={[0, 0, 0.001]} />
-        </Interact>
-      )}
+        )}
+      </Interact>
     </group>
   );
 }

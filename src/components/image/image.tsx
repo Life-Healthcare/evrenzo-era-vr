@@ -14,7 +14,7 @@ export default function Image({ src, height, ...props }: Props) {
     <group {...props}>
       <mesh frustumCulled={false}>
         <planeBufferGeometry args={texture.args} />
-        <meshBasicMaterial transparent map={texture.map} />
+        <meshBasicMaterial transparent map={texture.map} depthWrite={false} />
       </mesh>
     </group>
   );
