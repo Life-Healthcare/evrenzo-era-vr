@@ -3,7 +3,8 @@ type Config = {
 };
 
 const config: Config = {
-  env: (process.env.NODE_ENV ?? "production") as Config["env"],
+  // env: (process.env.NODE_ENV ?? "production") as Config["env"],
+  env: "development",
 };
 
 export default config;

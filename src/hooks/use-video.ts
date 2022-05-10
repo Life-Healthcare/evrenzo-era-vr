@@ -45,6 +45,12 @@ export default function useVideo(
       }
     }
 
+    function onPause() {
+      setState((state) => {
+        return { ...state, playing: false };
+      });
+    }
+
     function onPlay() {
       setState((state) => {
         return { ...state, ended: false, playing: true };
@@ -55,6 +61,7 @@ export default function useVideo(
     }
 
     video.addEventListener("loadedmetadata", onLoaded);
+    video.addEventListener("pause", onPause);
     video.addEventListener("play", onPlay);
     video.addEventListener("ended", onEnded);
 
@@ -69,6 +76,7 @@ export default function useVideo(
 
     return () => {
       video.removeEventListener("loadedmetadata", onLoaded);
+      video.removeEventListener("pause", onPause);
       video.removeEventListener("play", onPlay);
       video.removeEventListener("ended", onEnded);
     };
