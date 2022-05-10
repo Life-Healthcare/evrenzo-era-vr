@@ -71,7 +71,7 @@ export default function Timelapse() {
                   <Video
                     src={assets.timelapseVideo}
                     height={3}
-                    // onPlay={() => audio.pause()}
+                    onPlay={() => audio.pause()}
                     onEnded={() => setVideoEnded(true)}
                   />
                   <Button
