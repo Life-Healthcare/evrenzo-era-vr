@@ -1,11 +1,13 @@
 import React from "react";
 import { GroupProps } from "@react-three/fiber";
+import { a, useSpring } from "@react-spring/three";
 import useVideoTexture from "@/hooks/use-video-texture";
-import config from "@/config/config";
 import useVideo from "@/hooks/use-video";
 import Image from "@/components/image/image";
 import Interact from "@/components/interact/interact";
 import assets from "@/config/assets";
+import useMounted from "@/hooks/use-mounted";
+import spring from "@/config/spring";
 
 type Props = GroupProps & {
   src?: string;
@@ -23,6 +25,13 @@ export default function Video({
 }: Props) {
   const [state, video] = useVideo(src, { onPlay, onEnded });
   const texture = useVideoTexture([state, video], height);
+
+  const mounted = useMounted();
+
+  const materialProps = useSpring({
+    opacity: mounted ? 1 : 0,
+    config: { ...spring },
+  });
 
   React.useEffect(() => {
     function onEnded() {
@@ -52,9 +61,13 @@ export default function Video({
       >
         <mesh frustumCulled={false}>
           <planeBufferGeometry args={texture.args} />
-          <meshBasicMaterial transparent depthWrite={false}>
+          <a.meshBasicMaterial
+            transparent
+            depthWrite={false}
+            {...materialProps}
+          >
             <videoTexture attach="map" args={[texture.video]} />
-          </meshBasicMaterial>
+          </a.meshBasicMaterial>
         </mesh>
         {!state.playing && (
           <Image

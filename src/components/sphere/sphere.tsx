@@ -2,6 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import canvasConfig from "@/config/canvas-config";
+import useMounted from "@/hooks/use-mounted";
 
 type Props = {
   src: string;
@@ -47,6 +48,10 @@ export default function Sphere({
       video.removeEventListener("ended", onVideoEnded);
     };
   }, [video, onVideoEnded]);
+
+  const mounted = useMounted();
+
+  if (!mounted) return <></>;
 
   return (
     <group>
