@@ -1,22 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sphere from "@/components/sphere/sphere";
-import { asset } from "@/utils";
 import Image from "@/components/image/image";
 import Button from "@/components/button/button";
-import { PageId } from "@/types";
-import useAppState from "@/hooks/use-app-state";
 import useAudio from "@/hooks/use-audio";
 import Interact from "@/components/interact/interact";
+import assets from "@/config/assets";
 
 export default function Aerial1() {
-  const setPage = useAppState((state) => state.setPage);
+  const navigate = useNavigate();
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showChart, setShowChart] = React.useState(false);
 
-  const audio = useAudio(
-    asset(`/assets/aerial-1/voiceover-${showChart ? 2 : 1}.mp3`)
-  );
+  const audioSrc = React.useMemo(() => {
+    if (showChart) return assets.aerial1Voiceover2;
+    return assets.aerial1Voiceover1;
+  }, [showChart]);
+
+  const audio = useAudio(audioSrc);
 
   React.useEffect(() => {
     return () => audio.pause();
@@ -25,7 +27,7 @@ export default function Aerial1() {
   return (
     <Sphere
       type="video"
-      src={asset("/assets/aerial-1/sphere.mp4")}
+      src={assets.aerial1Sphere}
       loop={false}
       onVideoEnded={() => setSphereVideoEnded(true)}
     >
@@ -34,27 +36,24 @@ export default function Aerial1() {
           {!showChart && (
             <>
               <Interact onSelect={() => setShowChart(true)}>
-                <Image
-                  src={asset("/assets/aerial-1/chart-intro.png")}
-                  height={3}
-                />
+                <Image src={assets.aerial1ChartIntro} height={3} />
               </Interact>
               <Button
-                image={asset("/assets/buttons/skip-and-continue.png")}
+                image={assets.buttonSkipAndContinue}
                 height={0.5}
                 position={[0, -2, 0]}
-                onSelect={() => setPage({ id: PageId.aerial2 })}
+                onSelect={() => navigate("/aerial-2")}
               />
             </>
           )}
           {showChart && (
             <>
-              <Image src={asset("/assets/aerial-1/chart.png")} height={3} />
+              <Image src={assets.aerial1Chart} height={3} />
               <Button
-                image={asset("/assets/buttons/continue.png")}
+                image={assets.buttonContinue}
                 height={0.5}
                 position={[0, -2, 0]}
-                onSelect={() => setPage({ id: PageId.aerial2 })}
+                onSelect={() => navigate("/aerial-2")}
               />
             </>
           )}

@@ -5,6 +5,7 @@ import config from "@/config/config";
 import useVideo from "@/hooks/use-video";
 import Image from "@/components/image/image";
 import Interact from "@/components/interact/interact";
+import assets from "@/config/assets";
 
 type Props = GroupProps & {
   src?: string;
@@ -36,6 +37,7 @@ export default function Video({
     video.addEventListener("ended", onEnded);
     return () => {
       video.removeEventListener("ended", onEnded);
+      video.pause();
     };
   }, [video]);
 
@@ -59,7 +61,11 @@ export default function Video({
           </meshBasicMaterial>
         </mesh>
         {!state.playing && (
-          <Image src="/assets/play.png" height={0.7} position={[0, 0, 0.001]} />
+          <Image
+            src={assets.buttonPlay}
+            height={0.7}
+            position={[0, 0, 0.001]}
+          />
         )}
       </Interact>
     </group>

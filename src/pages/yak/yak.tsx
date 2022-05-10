@@ -1,14 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sphere from "@/components/sphere/sphere";
-import { asset } from "@/utils";
-import { PageId } from "@/types";
-import useAppState from "@/hooks/use-app-state";
 import useAudio from "@/hooks/use-audio";
+import assets from "@/config/assets";
 
 export default function Yak() {
-  const setPage = useAppState((state) => state.setPage);
+  const navigate = useNavigate();
 
-  const audio = useAudio(asset("/assets/yak/voiceover.mp3"));
+  const audio = useAudio(assets.yakVoiceover);
 
   React.useEffect(() => {
     return () => audio.pause();
@@ -17,9 +16,9 @@ export default function Yak() {
   return (
     <Sphere
       type="video"
-      src={asset("/assets/yak/sphere.mp4")}
+      src={assets.yakSphere}
       loop={false}
-      onVideoEnded={() => setPage({ id: PageId.mountainPass })}
+      onVideoEnded={() => navigate("/mountain-pass")}
     />
   );
 }

@@ -28,6 +28,12 @@ export const AppReset = createGlobalStyle`
     color: #fefefe;
   }
 
+  #root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   #VRButton {
     bottom: 50% !important;
     transform: translateY(50%) !important;

@@ -1,13 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sphere from "@/components/sphere/sphere";
-import { asset } from "@/utils";
 import Image from "@/components/image/image";
 import Button from "@/components/button/button";
-import { PageId } from "@/types";
-import useAppState from "@/hooks/use-app-state";
 import Video from "@/components/video/video";
 import useAudio from "@/hooks/use-audio";
 import Interact from "@/components/interact/interact";
+import assets from "@/config/assets";
 
 enum State {
   video,
@@ -15,7 +14,7 @@ enum State {
 }
 
 export default function Timelapse() {
-  const setPage = useAppState((state) => state.setPage);
+  const navigate = useNavigate();
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [videoEnded, setVideoEnded] = React.useState(false);
@@ -23,28 +22,27 @@ export default function Timelapse() {
 
   const [state, setState] = React.useState<State>(State.video);
 
-  const audioUrl = React.useMemo(() => {
-    let id = 0;
-    if (sphereVideoEnded) {
-      id = state === State.video ? 1 : 2;
-    }
-    return asset(`/assets/timelapse/voiceover-${id}.mp3`);
+  const audioSrc = React.useMemo(() => {
+    if (!sphereVideoEnded) return assets.timelapseVoiceover1;
+    if (state === State.video) return assets.timelapseVoiceover2;
+    return assets.timelapseVoiceover3;
   }, [sphereVideoEnded, state]);
 
-  const audio = useAudio(audioUrl);
+  const audio = useAudio(audioSrc);
 
   React.useEffect(() => {
     return () => audio.pause();
   }, []);
 
   const videoButton = React.useMemo(() => {
-    return videoEnded ? "continue" : "skip-and-continue";
+    if (videoEnded) return assets.buttonContinue;
+    return assets.buttonSkipAndContinue;
   }, [videoEnded]);
 
   return (
     <Sphere
       type="video"
-      src={asset("/assets/timelapse/sphere.mp4")}
+      src={assets.timelapseSphere}
       loop={false}
       onVideoEnded={() => setSphereVideoEnded(true)}
     >
@@ -55,13 +53,10 @@ export default function Timelapse() {
               {!showVideo && (
                 <>
                   <Interact onSelect={() => setShowVideo(true)}>
-                    <Image
-                      src={asset("/assets/timelapse/video-poster.png")}
-                      height={3}
-                    />
+                    <Image src={assets.timelapseVideoPoster} height={3} />
                   </Interact>
                   <Button
-                    image={asset("/assets/buttons/skip-and-continue.png")}
+                    image={assets.buttonSkipAndContinue}
                     height={0.5}
                     position={[0, -2, 0]}
                     onSelect={() => setState(State.image)}
@@ -71,13 +66,13 @@ export default function Timelapse() {
               {showVideo && (
                 <>
                   <Video
-                    src={asset("/assets/timelapse/video.mp4")}
+                    src={assets.timelapseVideo}
                     height={3}
                     onPlay={() => audio.pause()}
                     onEnded={() => setVideoEnded(true)}
                   />
                   <Button
-                    image={asset(`/assets/buttons/${videoButton}.png`)}
+                    image={videoButton}
                     height={0.5}
                     position={[0, -2, 0]}
                     onSelect={() => setState(State.image)}
@@ -87,8 +82,8 @@ export default function Timelapse() {
             </>
           )}
           {state === State.image && (
-            <Interact onSelect={() => setPage({ id: PageId.end })}>
-              <Image src={asset("/assets/timelapse/image.png")} height={3.5} />
+            <Interact onSelect={() => navigate("/end")}>
+              <Image src={assets.timelapseImage} height={3.5} />
             </Interact>
           )}
         </group>

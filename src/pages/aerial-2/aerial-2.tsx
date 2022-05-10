@@ -1,25 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sphere from "@/components/sphere/sphere";
-import { asset } from "@/utils";
 import Image from "@/components/image/image";
 import Button from "@/components/button/button";
-import { PageId } from "@/types";
-import useAppState from "@/hooks/use-app-state";
 import Video from "@/components/video/video";
 import useAudio from "@/hooks/use-audio";
 import Interact from "@/components/interact/interact";
+import assets from "@/config/assets";
 
 export default function Aerial2() {
-  const setPage = useAppState((state) => state.setPage);
+  const navigate = useNavigate();
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [videoEnded, setVideoEnded] = React.useState(false);
   const [showVideo, setShowVideo] = React.useState(false);
 
-  const audio = useAudio(asset("/assets/aerial-2/voiceover.mp3"));
+  const audio = useAudio(assets.aerial1Voiceover);
 
   const videoButton = React.useMemo(() => {
-    return videoEnded ? "continue" : "skip-and-continue";
+    if (videoEnded) return assets.buttonContinue;
+    return assets.buttonSkipAndContinue;
   }, [videoEnded]);
 
   React.useEffect(() => {
@@ -29,7 +29,7 @@ export default function Aerial2() {
   return (
     <Sphere
       type="video"
-      src={asset("/assets/aerial-2/sphere.mp4")}
+      src={assets.aerial2Sphere}
       loop={false}
       onVideoEnded={() => setSphereVideoEnded(true)}
     >
@@ -38,32 +38,29 @@ export default function Aerial2() {
           {!showVideo && (
             <>
               <Interact onSelect={() => setShowVideo(true)}>
-                <Image
-                  src={asset("/assets/aerial-2/video-poster.png")}
-                  height={3}
-                />
+                <Image src={assets.aerial2VideoPoster} height={3} />
               </Interact>
               <Button
-                image={asset("/assets/buttons/skip-and-continue.png")}
+                image={assets.buttonSkipAndContinue}
                 height={0.5}
                 position={[0, -2, 0]}
-                onSelect={() => setPage({ id: PageId.farmers })}
+                onSelect={() => navigate("/farmers")}
               />
             </>
           )}
           {showVideo && (
             <>
               <Video
-                src={asset("/assets/aerial-2/video.mp4")}
+                src={assets.aerial2Video}
                 height={3}
                 onPlay={() => audio.pause()}
                 onEnded={() => setVideoEnded(true)}
               />
               <Button
-                image={asset(`/assets/buttons/${videoButton}.png`)}
+                image={videoButton}
                 height={0.5}
                 position={[0, -2, 0]}
-                onSelect={() => setPage({ id: PageId.farmers })}
+                onSelect={() => navigate("/farmers")}
               />
             </>
           )}

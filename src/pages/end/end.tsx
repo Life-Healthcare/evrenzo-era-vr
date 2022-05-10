@@ -1,25 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sphere from "@/components/sphere/sphere";
-import { asset } from "@/utils";
 import Image from "@/components/image/image";
-import { PageId } from "@/types";
-import useAppState from "@/hooks/use-app-state";
 import useAudio from "@/hooks/use-audio";
 import Interact from "@/components/interact/interact";
+import assets from "@/config/assets";
 
 export default function End() {
-  const setPage = useAppState((state) => state.setPage);
+  const navigate = useNavigate();
 
-  const audio = useAudio(asset("/assets/end/voiceover.mp3"));
+  const audio = useAudio(assets.endVoiceover);
 
   React.useEffect(() => {
     return () => audio.pause();
   }, []);
 
   return (
-    <Sphere type="video" src={asset("/assets/end/sphere.mp4")}>
-      <Interact onSelect={() => setPage({ id: PageId.home })}>
-        <Image src={asset("/assets/end/image.png")} height={4} />
+    <Sphere type="video" src={assets.endSphere}>
+      <Interact onSelect={() => navigate("/")}>
+        <Image src={assets.endImage} height={4} />
       </Interact>
     </Sphere>
   );
