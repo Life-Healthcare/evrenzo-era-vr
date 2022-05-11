@@ -18,13 +18,13 @@ export function preloadAssets() {
       return new Promise(async (resolve, reject) => {
         try {
           // @note removed for now
-          // for (const asset in assets) {
-          //   const res = await fetch(assets[asset]);
-          //   const blob = await res.blob();
-          //   assets[asset] = URL.createObjectURL(blob);
-          //   loaded++;
-          //   progressFn(loaded / total);
-          // }
+          for (const asset in assets) {
+            const res = await fetch(assets[asset]);
+            const blob = await res.blob();
+            assets[asset] = URL.createObjectURL(blob);
+            loaded++;
+            progressFn(loaded / total);
+          }
           resolve(assets);
         } catch (err) {
           reject(err);
