@@ -1,23 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Workbox } from "workbox-window";
 import App from "@/components/app/app";
 import config from "@/config/config";
 
-if ("serviceWorker" in navigator && config.env !== "development") {
-  const wb = new Workbox("./service-worker.js", { scope: "/" });
-  wb.addEventListener("activated", async (event) => {
-    // Reload when a new update is available
-    // @todo show notification
-    if (event.isUpdate) {
-      await wb.update();
-      if (confirm("A new version is available, reload?")) {
-        window.location.reload();
-      }
-    }
-  });
-  wb.register().then(() => {
-    console.log("Service Worker registered");
+if ("serviceWorker" in navigator && config.env === "production") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((registration) => {
+        registration.onupdatefound = () => {
+          console.log("new version");
+          registration
+            .update()
+            .then(() => {
+              console.log("updated");
+              location.reload();
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        };
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 }
 

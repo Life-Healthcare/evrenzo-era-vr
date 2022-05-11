@@ -57,15 +57,15 @@ export default function App() {
           }}
         >
           <Router>
+            <DefaultXRControllers
+              rayMaterial={{ transparent: true, opacity: 0 }}
+            />
             <ResetApp />
             <ResetAppOnExit />
             <Container>
               <Camera />
               {isPresenting && (
                 <>
-                  <DefaultXRControllers
-                    rayMaterial={{ transparent: true, opacity: 0 }}
-                  />
                   <Controllers />
 
                   <ambientLight />

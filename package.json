@@ -51,7 +51,7 @@
     "styled-components": "^5.3.5",
     "three": "^0.139.2",
     "use-model-validation": "^0.2.6",
-    "workbox-window": "^6.5.3",
+    "workbox-precaching": "^6.5.3",
     "zustand": "^3.7.2"
   }
 }
