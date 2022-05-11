@@ -52,9 +52,6 @@ export default function App() {
           dpr={1}
           // @ts-ignore
           vr="true"
-          sessionInit={{
-            optionalFeatures: ["layers"],
-          }}
         >
           <Router>
             <DefaultXRControllers

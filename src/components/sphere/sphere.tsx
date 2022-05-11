@@ -17,7 +17,7 @@ export default function Sphere({
   loop = true,
   onVideoEnded,
 }: Props) {
-  const { gl, camera } = useThree();
+  const { camera } = useThree();
 
   const radius = React.useMemo(() => {
     const cam = camera as THREE.PerspectiveCamera;
@@ -49,58 +49,9 @@ export default function Sphere({
     };
   }, [video, onVideoEnded]);
 
-  const layersSupported = React.useMemo(() => {
-    return "XRMediaBinding" in window;
-  }, []);
-
-  // High performance rendering of immersive stereoscopic video
-  React.useEffect(() => {
-    if (!layersSupported) return;
-    const session = gl.xr.getSession();
-    if (session === null) return;
-    // @ts-ignore
-    const xrMediaFactory = new XRMediaBinding(session);
-
-    function onReady() {
-      const request = session.requestReferenceSpace("local");
-      if (!request) return;
-      request.then((refSpace) => {
-        const mediaLayer = xrMediaFactory.createEquirectLayer(video, {
-          space: refSpace,
-          centralHorizontalAngle: Math.PI * 2,
-          layout: "stereo-top-bottom",
-        });
-        video.play().catch((err) => {
-          console.error(err);
-        });
-        try {
-          session
-            .updateRenderState({
-              // @ts-ignore
-              layers: [mediaLayer, ...session.renderState.layers],
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        } catch (err) {
-          console.error(err);
-        }
-      });
-    }
-
-    video.addEventListener("canplaythrough", onReady);
-    return () => {
-      video.removeEventListener("canplaythrough", onReady);
-    };
-  }, [layersSupported, gl, video]);
-
   const mounted = useMounted();
 
   if (!mounted) return <></>;
-
-  if (layersSupported) {
-    return <>{children}</>;
-  }
 
   return (
     <group>
