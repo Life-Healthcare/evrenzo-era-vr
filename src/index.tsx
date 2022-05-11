@@ -9,16 +9,25 @@ if ("serviceWorker" in navigator && config.env === "production") {
       .register("./sw.js")
       .then((registration) => {
         registration.onupdatefound = () => {
+          const serviceWorker = registration.installing;
+          if (serviceWorker == null) return;
           console.log("new version");
-          registration
-            .update()
-            .then(() => {
-              console.log("updated");
-              location.reload();
-            })
-            .catch((err) => {
-              console.error(err);
-            });
+          let updating = false;
+          serviceWorker.onstatechange = () => {
+            if (
+              serviceWorker.state === "installed" &&
+              navigator.serviceWorker.controller &&
+              registration &&
+              registration.waiting
+            ) {
+              updating = true;
+              registration.waiting.postMessage({ type: "SKIP_WAITING" });
+            }
+
+            if (updating && serviceWorker.state === "activated") {
+              window.location.reload();
+            }
+          };
         };
       })
       .catch((err) => {
