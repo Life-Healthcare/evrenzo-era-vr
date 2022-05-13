@@ -12,15 +12,9 @@ export default function Aerial2() {
   const navigate = useNavigate();
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
-  const [videoEnded, setVideoEnded] = React.useState(false);
   const [showVideo, setShowVideo] = React.useState(false);
 
   const audio = useAudio(assets.aerial1Voiceover);
-
-  const videoButton = React.useMemo(() => {
-    if (videoEnded) return assets.buttonContinue;
-    return assets.buttonSkipAndContinue;
-  }, [videoEnded]);
 
   React.useEffect(() => {
     return () => audio.pause();
@@ -40,7 +34,7 @@ export default function Aerial2() {
                 <Image src={assets.aerial2VideoPoster} height={3} />
               </Interact>
               <Button
-                image={assets.buttonSkipAndContinue}
+                image={assets.buttonContinue}
                 height={0.5}
                 position={[0, -2, 0]}
                 onSelect={() => navigate("/farmers")}
@@ -53,10 +47,9 @@ export default function Aerial2() {
                 src={assets.aerial2Video}
                 height={3}
                 onPlay={() => audio.pause()}
-                onEnded={() => setVideoEnded(true)}
               />
               <Button
-                image={videoButton}
+                image={assets.buttonContinue}
                 height={0.5}
                 position={[0, -2, 0]}
                 onSelect={() => navigate("/farmers")}

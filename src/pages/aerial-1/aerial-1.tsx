@@ -38,7 +38,7 @@ export default function Aerial1() {
                 <Image src={assets.aerial1ChartIntro} height={3} />
               </Interact>
               <Button
-                image={assets.buttonSkipAndContinue}
+                image={assets.buttonContinue}
                 height={0.5}
                 position={[0, -2, 0]}
                 onSelect={() => navigate("/aerial-2")}

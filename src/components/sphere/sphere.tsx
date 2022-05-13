@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import canvasConfig from "@/config/canvas-config";
 import useMounted from "@/hooks/use-mounted";
+import config from "@/config/config";
 
 type Props = {
   src: string;
@@ -37,6 +38,9 @@ export default function Sphere({
 
   React.useEffect(() => {
     video.loop = loop;
+    if (config.env === "development") {
+      video.playbackRate = 4;
+    }
   }, [video, loop]);
 
   React.useEffect(() => {

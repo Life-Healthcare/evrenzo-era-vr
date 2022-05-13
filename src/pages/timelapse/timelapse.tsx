@@ -9,22 +9,22 @@ import useAudio from "@/hooks/use-audio";
 import Interact from "@/components/interact/interact";
 
 enum State {
-  video,
-  image,
+  video1,
+  video2,
 }
 
 export default function Timelapse() {
   const navigate = useNavigate();
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
-  const [videoEnded, setVideoEnded] = React.useState(false);
-  const [showVideo, setShowVideo] = React.useState(false);
+  const [showVideo1, setShowVideo1] = React.useState(false);
+  const [showVideo2, setShowVideo2] = React.useState(false);
 
-  const [state, setState] = React.useState<State>(State.video);
+  const [state, setState] = React.useState<State>(State.video1);
 
   const audioSrc = React.useMemo(() => {
     if (!sphereVideoEnded) return assets.timelapseVoiceover1;
-    if (state === State.video) return assets.timelapseVoiceover2;
+    if (state === State.video1) return assets.timelapseVoiceover2;
     return assets.timelapseVoiceover3;
   }, [sphereVideoEnded, state]);
 
@@ -33,11 +33,6 @@ export default function Timelapse() {
   React.useEffect(() => {
     return () => audio.pause();
   }, []);
-
-  const videoButton = React.useMemo(() => {
-    if (videoEnded) return assets.buttonContinue;
-    return assets.buttonSkipAndContinue;
-  }, [videoEnded]);
 
   const onVideoEnded = React.useCallback(() => {
     setSphereVideoEnded(true);
@@ -51,43 +46,69 @@ export default function Timelapse() {
     >
       {sphereVideoEnded && (
         <group position={[0, 0.5, 0]}>
-          {state === State.video && (
+          {state === State.video1 && (
             <>
-              {!showVideo && (
+              {!showVideo1 && (
                 <>
-                  <Interact onSelect={() => setShowVideo(true)}>
-                    <Image src={assets.timelapseVideoPoster} height={3} />
+                  <Interact onSelect={() => setShowVideo1(true)}>
+                    <Image src={assets.timelapseVideo1Poster} height={3} />
                   </Interact>
                   <Button
-                    image={assets.buttonSkipAndContinue}
+                    image={assets.buttonContinue}
                     height={0.5}
                     position={[0, -2, 0]}
-                    onSelect={() => setState(State.image)}
+                    onSelect={() => setState(State.video2)}
                   />
                 </>
               )}
-              {showVideo && (
+              {showVideo1 && (
                 <>
                   <Video
-                    src={assets.timelapseVideo}
+                    src={assets.timelapseVideo1}
                     height={3}
                     onPlay={() => audio.pause()}
-                    onEnded={() => setVideoEnded(true)}
                   />
                   <Button
-                    image={videoButton}
+                    image={assets.buttonContinue}
                     height={0.5}
                     position={[0, -2, 0]}
-                    onSelect={() => setState(State.image)}
+                    onSelect={() => setState(State.video2)}
                   />
                 </>
               )}
             </>
           )}
-          {state === State.image && (
-            <Interact onSelect={() => navigate("/end")}>
-              <Image src={assets.timelapseImage} height={3.5} />
-            </Interact>
+          {state === State.video2 && (
+            <>
+              {!showVideo2 && (
+                <>
+                  <Interact onSelect={() => setShowVideo2(true)}>
+                    <Image src={assets.timelapseVideo2Poster} height={3} />
+                  </Interact>
+                  <Button
+                    image={assets.buttonContinue}
+                    height={0.5}
+                    position={[0, -2, 0]}
+                    onSelect={() => navigate("/end")}
+                  />
+                </>
+              )}
+              {showVideo2 && (
+                <>
+                  <Video
+                    src={assets.timelapseVideo2}
+                    height={3}
+                    onPlay={() => audio.pause()}
+                  />
+                  <Button
+                    image={assets.buttonContinue}
+                    height={0.5}
+                    position={[0, -2, 0]}
+                    onSelect={() => navigate("/end")}
+                  />
+                </>
+              )}
+            </>
           )}
         </group>
       )}

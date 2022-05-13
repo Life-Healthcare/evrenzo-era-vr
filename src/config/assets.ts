@@ -2,7 +2,6 @@ import { asset } from "@/utils";
 
 const assets = {
   // General
-  buttonSkipAndContinue: asset("/assets/buttons/skip-and-continue.png"),
   buttonContinue: asset("/assets/buttons/continue.png"),
   buttonPlay: asset("/assets/buttons/play.png"),
   // Home
@@ -34,9 +33,10 @@ const assets = {
   mountainVoiceover: asset("/assets/mountain-pass/voiceover.mp3"),
   // Timelapse
   timelapseSphere: asset("/assets/timelapse/sphere.mp4"),
-  timelapseVideoPoster: asset("/assets/timelapse/video-poster.png"),
-  timelapseVideo: asset("/assets/timelapse/video.mp4"),
-  timelapseImage: asset("/assets/timelapse/image.png"),
+  timelapseVideo1Poster: asset("/assets/timelapse/video1-poster.png"),
+  timelapseVideo1: asset("/assets/timelapse/video1.mp4"),
+  timelapseVideo2Poster: asset("/assets/timelapse/video2-poster.png"),
+  timelapseVideo2: asset("/assets/timelapse/video2.mp4"),
   timelapseVoiceover1: asset("/assets/timelapse/voiceover-1.mp3"),
   timelapseVoiceover2: asset("/assets/timelapse/voiceover-2.mp3"),
   timelapseVoiceover3: asset("/assets/timelapse/voiceover-3.mp3"),
