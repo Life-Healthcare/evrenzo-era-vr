@@ -13,6 +13,7 @@ export default function Aerial2() {
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showVideo, setShowVideo] = React.useState(false);
+  const [videoEnded, setVideoEnded] = React.useState(false);
 
   const audio = useAudio(assets.aerial1Voiceover);
 
@@ -29,17 +30,9 @@ export default function Aerial2() {
       {sphereVideoEnded && (
         <group position={[0, 0.5, 0]}>
           {!showVideo && (
-            <>
-              <Interact onSelect={() => setShowVideo(true)}>
-                <Image src={assets.aerial2VideoPoster} height={3} />
-              </Interact>
-              <Button
-                image={assets.buttonContinue}
-                height={0.5}
-                position={[0, -2, 0]}
-                onSelect={() => navigate("/farmers")}
-              />
-            </>
+            <Interact onSelect={() => setShowVideo(true)}>
+              <Image src={assets.aerial2VideoPoster} height={3} />
+            </Interact>
           )}
           {showVideo && (
             <>
@@ -47,13 +40,16 @@ export default function Aerial2() {
                 src={assets.aerial2Video}
                 height={3}
                 onPlay={() => audio.pause()}
+                onEnded={() => setVideoEnded(true)}
               />
-              <Button
-                image={assets.buttonContinue}
-                height={0.5}
-                position={[0, -2, 0]}
-                onSelect={() => navigate("/farmers")}
-              />
+              {videoEnded && (
+                <Button
+                  image={assets.buttonContinue}
+                  height={0.5}
+                  position={[0, -2, 0]}
+                  onSelect={() => navigate("/farmers")}
+                />
+              )}
             </>
           )}
         </group>

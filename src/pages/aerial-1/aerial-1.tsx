@@ -12,13 +12,19 @@ export default function Aerial1() {
 
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showChart, setShowChart] = React.useState(false);
+  const [audioEnded, setAudioEnded] = React.useState(false);
 
   const audioSrc = React.useMemo(() => {
     if (showChart) return assets.aerial1Voiceover2;
     return assets.aerial1Voiceover1;
   }, [showChart]);
 
-  const audio = useAudio(audioSrc);
+  const onAudioEnded = React.useCallback(() => {
+    if (!showChart) return;
+    setAudioEnded(true);
+  }, [showChart]);
+
+  const audio = useAudio(audioSrc, onAudioEnded);
 
   React.useEffect(() => {
     return () => audio.pause();
@@ -33,27 +39,21 @@ export default function Aerial1() {
       {sphereVideoEnded && (
         <group position={[0, 0.5, 0]}>
           {!showChart && (
-            <>
-              <Interact onSelect={() => setShowChart(true)}>
-                <Image src={assets.aerial1ChartIntro} height={3} />
-              </Interact>
-              <Button
-                image={assets.buttonContinue}
-                height={0.5}
-                position={[0, -2, 0]}
-                onSelect={() => navigate("/aerial-2")}
-              />
-            </>
+            <Interact onSelect={() => setShowChart(true)}>
+              <Image src={assets.aerial1ChartIntro} height={3} />
+            </Interact>
           )}
           {showChart && (
             <>
               <Image src={assets.aerial1Chart} height={3} />
-              <Button
-                image={assets.buttonContinue}
-                height={0.5}
-                position={[0, -2, 0]}
-                onSelect={() => navigate("/aerial-2")}
-              />
+              {audioEnded && (
+                <Button
+                  image={assets.buttonContinue}
+                  height={0.5}
+                  position={[0, -2, 0]}
+                  onSelect={() => navigate("/aerial-2")}
+                />
+              )}
             </>
           )}
         </group>

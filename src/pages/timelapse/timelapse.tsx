@@ -19,6 +19,8 @@ export default function Timelapse() {
   const [sphereVideoEnded, setSphereVideoEnded] = React.useState(false);
   const [showVideo1, setShowVideo1] = React.useState(false);
   const [showVideo2, setShowVideo2] = React.useState(false);
+  const [video1Ended, setVideo1Ended] = React.useState(false);
+  const [video2Ended, setVideo2Ended] = React.useState(false);
 
   const [state, setState] = React.useState<State>(State.video1);
 
@@ -49,17 +51,9 @@ export default function Timelapse() {
           {state === State.video1 && (
             <>
               {!showVideo1 && (
-                <>
-                  <Interact onSelect={() => setShowVideo1(true)}>
-                    <Image src={assets.timelapseVideo1Poster} height={3} />
-                  </Interact>
-                  <Button
-                    image={assets.buttonContinue}
-                    height={0.5}
-                    position={[0, -2, 0]}
-                    onSelect={() => setState(State.video2)}
-                  />
-                </>
+                <Interact onSelect={() => setShowVideo1(true)}>
+                  <Image src={assets.timelapseVideo1Poster} height={3} />
+                </Interact>
               )}
               {showVideo1 && (
                 <>
@@ -67,13 +61,16 @@ export default function Timelapse() {
                     src={assets.timelapseVideo1}
                     height={3}
                     onPlay={() => audio.pause()}
+                    onEnded={() => setVideo1Ended(true)}
                   />
-                  <Button
-                    image={assets.buttonContinue}
-                    height={0.5}
-                    position={[0, -2, 0]}
-                    onSelect={() => setState(State.video2)}
-                  />
+                  {video1Ended && (
+                    <Button
+                      image={assets.buttonContinue}
+                      height={0.5}
+                      position={[0, -2, 0]}
+                      onSelect={() => setState(State.video2)}
+                    />
+                  )}
                 </>
               )}
             </>
@@ -81,17 +78,9 @@ export default function Timelapse() {
           {state === State.video2 && (
             <>
               {!showVideo2 && (
-                <>
-                  <Interact onSelect={() => setShowVideo2(true)}>
-                    <Image src={assets.timelapseVideo2Poster} height={3} />
-                  </Interact>
-                  <Button
-                    image={assets.buttonContinue}
-                    height={0.5}
-                    position={[0, -2, 0]}
-                    onSelect={() => navigate("/end")}
-                  />
-                </>
+                <Interact onSelect={() => setShowVideo2(true)}>
+                  <Image src={assets.timelapseVideo2Poster} height={3} />
+                </Interact>
               )}
               {showVideo2 && (
                 <>
@@ -99,13 +88,16 @@ export default function Timelapse() {
                     src={assets.timelapseVideo2}
                     height={3}
                     onPlay={() => audio.pause()}
+                    onEnded={() => setVideo2Ended(true)}
                   />
-                  <Button
-                    image={assets.buttonContinue}
-                    height={0.5}
-                    position={[0, -2, 0]}
-                    onSelect={() => navigate("/end")}
-                  />
+                  {video2Ended && (
+                    <Button
+                      image={assets.buttonContinue}
+                      height={0.5}
+                      position={[0, -2, 0]}
+                      onSelect={() => navigate("/end")}
+                    />
+                  )}
                 </>
               )}
             </>
