@@ -1,10 +1,6 @@
 import { asset } from "@/utils";
 
-type Assets = {
-  [asset: string]: string;
-};
-
-const assets: Assets = {
+const assets = {
   // General
   buttonSkipAndContinue: asset("/assets/buttons/skip-and-continue.png"),
   buttonContinue: asset("/assets/buttons/continue.png"),
@@ -14,7 +10,8 @@ const assets: Assets = {
   homeInstructions: asset("/assets/home/instructions.png"),
   homeStartExperience: asset("/assets/buttons/start-experience.png"),
   homeDisclaimer: asset("/assets/home/disclaimer.png"),
-  homeJobCode: asset("/assets/home/job-code.png"),
+  homeLegal: asset("/assets/home/legal.png"),
+  homeInfo: asset("/assets/home/info.png"),
   // Aerial 1
   aerial1Sphere: asset("/assets/aerial-1/sphere.mp4"),
   aerial1ChartIntro: asset("/assets/aerial-1/chart-intro.png"),
