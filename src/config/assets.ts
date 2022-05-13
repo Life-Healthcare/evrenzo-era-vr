@@ -36,7 +36,7 @@ const assets = {
   timelapseVideo1Poster: asset("/assets/timelapse/video1-poster.png"),
   timelapseVideo1: asset("/assets/timelapse/video1.mp4"),
   timelapseVideo2Poster: asset("/assets/timelapse/video2-poster.png"),
-  timelapseVideo2: asset("/assets/timelapse/video2.mp4"),
+  timelapseVideo2: asset("/assets/timelapse/video2-trimmed.mp4"),
   timelapseVoiceover1: asset("/assets/timelapse/voiceover-1.mp3"),
   timelapseVoiceover2: asset("/assets/timelapse/voiceover-2.mp3"),
   timelapseVoiceover3: asset("/assets/timelapse/voiceover-3.mp3"),

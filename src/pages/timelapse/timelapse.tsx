@@ -80,6 +80,11 @@ export default function Timelapse() {
               {!showVideo2 && (
                 <Interact onSelect={() => setShowVideo2(true)}>
                   <Image src={assets.timelapseVideo2Poster} height={3} />
+                  <Image
+                    src={assets.buttonPlay}
+                    height={0.7}
+                    position={[0, 0, 0.001]}
+                  />
                 </Interact>
               )}
               {showVideo2 && (
