@@ -21,14 +21,16 @@ export default function Timelapse() {
   const [showVideo2, setShowVideo2] = React.useState(false);
   const [video1Ended, setVideo1Ended] = React.useState(false);
   const [video2Ended, setVideo2Ended] = React.useState(false);
+  const [video2Playing, setVideo2Playing] = React.useState(false);
 
   const [state, setState] = React.useState<State>(State.video1);
 
   const audioSrc = React.useMemo(() => {
+    if (video2Playing) return assets.timelapseVoiceover3;
     if (!sphereVideoEnded) return assets.timelapseVoiceover1;
     if (state === State.video1) return assets.timelapseVoiceover2;
-    return assets.timelapseVoiceover3;
-  }, [sphereVideoEnded, state]);
+    return "";
+  }, [sphereVideoEnded, state, video2Playing]);
 
   const audio = useAudio(audioSrc);
 
@@ -92,8 +94,14 @@ export default function Timelapse() {
                   <Video
                     src={assets.timelapseVideo2}
                     height={3}
-                    onPlay={() => audio.pause()}
-                    onEnded={() => setVideo2Ended(true)}
+                    onPlay={() => {
+                      setVideo2Playing(true);
+                    }}
+                    onEnded={() => {
+                      setVideo2Ended(true);
+                      setVideo2Playing(false);
+                      audio.pause();
+                    }}
                   />
                   {video2Ended && (
                     <Button

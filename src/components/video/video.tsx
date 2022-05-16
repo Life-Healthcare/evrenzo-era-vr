@@ -8,6 +8,7 @@ import Interact from "@/components/interact/interact";
 import assets from "@/config/assets";
 import useMounted from "@/hooks/use-mounted";
 import spring from "@/config/spring";
+import config from "@/config/config";
 
 type Props = GroupProps & {
   src?: string;
@@ -37,6 +38,10 @@ export default function Video({
     function onEnded() {
       video.pause();
       video.currentTime = 0;
+    }
+
+    if (config.env === "development") {
+      video.playbackRate = 4;
     }
 
     video.addEventListener("ended", onEnded);
