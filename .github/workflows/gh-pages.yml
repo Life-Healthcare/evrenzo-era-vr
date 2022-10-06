@@ -19,7 +19,7 @@ jobs:
         run: |
           git lfs pull
           rm -rf node_modules package-lock.json
-          npm install
+          npm install --legacy-peer-deps
           PUBLIC_PATH=./ npm run build
 
       - name: Deploy 🚀
